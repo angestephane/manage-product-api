@@ -1,12 +1,14 @@
 import { Router } from "express";
 
+import controller from "./controller";
+
 const router = Router();
 
 /**
  * Product
  */
 
-router.get("/product", () => {});
+router.get("/product", controller.createProduct);
 router.get("/product/:id", () => {});
 router.post("/product", () => {});
 router.put("/product/:id", () => {});
