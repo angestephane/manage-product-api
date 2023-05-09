@@ -2,6 +2,7 @@ import express from "express";
 import morgan from "morgan";
 import cors from "cors";
 import router from "./router";
+import middleware from "./middleware";
 
 const app = express();
 
@@ -16,6 +17,6 @@ app.get("/", (req, res) => {
   res.json({ message: "OK" });
 });
 
-app.use("/api/v1", router);
+app.use("/api/v1", middleware.protect, router);
 
 export default app;
