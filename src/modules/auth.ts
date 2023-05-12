@@ -7,7 +7,8 @@ const createJWT = (user) => {
       id: user.id,
       username: user.username,
     },
-    process.env.JWT_TOKEN || "my-secret-key"
+    process.env.JWT_TOKEN || "my-secret-key",
+    { expiresIn: "1d" }
   );
   return token;
 };
