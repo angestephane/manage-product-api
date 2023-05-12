@@ -9,7 +9,7 @@ const createUser = async (req: Request, res: Response) => {
 
   const user = await prisma.user.create({
     data: {
-      userName: req.body.userName,
+      userName: req.body.username,
       password: hash,
     },
   });
@@ -18,9 +18,33 @@ const createUser = async (req: Request, res: Response) => {
 
   return res
     .status(200)
-    .json({ message: "User created successfully", data: { token } });
+    .json({ message: "User created successfully", token: token });
 };
 
 //TODO: Connect a user
 
-export { createUser };
+const connectUser = async (req: Request, res: Response) => {
+  const user = await prisma.user.findUnique({
+    where: {
+      userName: req.body.username,
+    },
+  });
+
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
+
+  const match = await comparePassword(req.body.password, user.password);
+
+  if (!match) {
+    return res.status(401).json({ message: "Password does not match" });
+  }
+
+  const token = createJWT(user);
+
+  return res
+    .status(200)
+    .json({ message: "User connected successfully", token: token });
+};
+
+export { createUser, connectUser };
