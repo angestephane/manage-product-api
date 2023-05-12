@@ -12,7 +12,7 @@ const protect = (req: express.Request, res: express.Response, next: any) => {
   const [, jwtToken] = token.split(" ");
   if (!jwtToken) {
     console.log(
-      "damm what token to you send meee... Oww my god. jwtToken is null"
+      "damm what token to you send me ?... Oww my god. jwtToken is null"
     );
 
     res.status(401);
