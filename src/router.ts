@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { body } from "express-validator";
 import { updateProduct } from "./handlers/product";
+import { handleInputErrors } from "./modules/middleware";
 
 const router = Router();
 
@@ -11,7 +12,12 @@ const router = Router();
 router.get("/product");
 router.get("/product/:id", () => {});
 router.post("/product", () => {});
-router.put("/product/:id", body("name").isString(), updateProduct);
+router.put(
+  "/product/:id",
+  body("name").isString().isLength({ min: 3 }),
+  handleInputErrors,
+  updateProduct
+);
 router.delete("/product/:id", () => {});
 
 /**
