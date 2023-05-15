@@ -24,8 +24,8 @@ model Product {
   createAt DateTime @default(now())
 
   name      String   @db.VarChar(150)
-  autheurId String
-  autheur   User     @relation(fields: [autheurId], references: [id])
+  authorId String
+  author   User     @relation(fields: [authorId], references: [id])
   update    Update[]
 }
 
