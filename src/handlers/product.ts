@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { validationResult } from "express-validator";
 
+const createProduct = (req: Request, res: Response) => {};
 const updateProduct = (req: Request, res: Response) => {};
 
-export { updateProduct };
+export { createProduct, updateProduct };
