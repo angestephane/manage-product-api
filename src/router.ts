@@ -1,6 +1,6 @@
 import { Router } from "express";
-
-import controller from "./controller";
+import { body } from "express-validator";
+import { updateProduct } from "./handlers/product";
 
 const router = Router();
 
@@ -8,10 +8,10 @@ const router = Router();
  * Product
  */
 
-router.get("/product", controller.createProduct);
+router.get("/product");
 router.get("/product/:id", () => {});
 router.post("/product", () => {});
-router.put("/product/:id", () => {});
+router.put("/product/:id", body("name").isString(), updateProduct);
 router.delete("/product/:id", () => {});
 
 /**
