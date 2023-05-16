@@ -30,15 +30,19 @@ const getProduct = async (req: Request, res: Response) => {
 };
 
 // let current user to create a product
-const createProduct = async (req: Request, res: Response) => {
-  const product = await prisma.product.create({
-    data: {
-      name: req.body.name,
-      authorId: req.user.id,
-    },
-  });
+const createProduct = async (req: Request, res: Response, next: any) => {
+  try {
+    const product = await prisma.product.create({
+      data: {
+        name: req.body.name,
+        authorId: req.user.id,
+      },
+    });
 
-  return res.json({ data: product });
+    return res.json({ data: product });
+  } catch (e) {
+    next(e);
+  }
 };
 
 // let current user to update a product
