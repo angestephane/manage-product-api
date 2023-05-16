@@ -13,10 +13,10 @@ datasource db {
 model User {
   id       String   @id @default(uuid())
   createAt DateTime @default(now())
-  userName String   @unique
+  username String   @unique
   password String
 
-  Products Product[]
+  products Product[]
 }
 
 model Product {
@@ -27,6 +27,7 @@ model Product {
   authorId String
   author   User     @relation(fields: [authorId], references: [id])
   update    Update[]
+  @@unique([id, authorId])
 }
 
 enum UPDATE_STATUS {
