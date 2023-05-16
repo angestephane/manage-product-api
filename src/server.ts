@@ -14,13 +14,22 @@ app.use(express.urlencoded({ extended: true }));
 // Permet d'utiliser les URLs cryptée (google.com?q=1&b=2)
 
 app.get("/", (req, res) => {
-  res.status(200);
-  res.json({ message: "OK" });
+  throw new Error("Oops");
 });
 
 app.use("/api/v1", middleware.protect, router);
 
 app.post("/user", createUser);
 app.post("/connect-user", connectUser);
+
+app.use((err, req, res, next) => {
+  if (err.type === "auth") {
+    res.status(401).json({ message: "Unauthorized" });
+  } else if (err.type === "input") {
+    res.status(400).json({ message: "Bad request... please check log" });
+  } else {
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
 
 export default app;
