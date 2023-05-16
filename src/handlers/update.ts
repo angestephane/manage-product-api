@@ -37,7 +37,11 @@ const createUpdates = async (req: Request, res: Response) => {
     return res.status(404).json({ message: "Product not found" });
   }
   const update = await prisma.update.create({
-    data: req.body,
+    data: {
+      title: req.body.title,
+      body: req.body.body,
+      product: { connect: { id: req.body.productId } },
+    },
   });
   return res.json({ data: update });
 };
