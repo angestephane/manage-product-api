@@ -9,7 +9,7 @@ const createUser = async (req: Request, res: Response) => {
 
   const user = await prisma.user.create({
     data: {
-      userName: req.body.username,
+      username: req.body.username,
       password: hash,
     },
   });
@@ -26,7 +26,7 @@ const createUser = async (req: Request, res: Response) => {
 const connectUser = async (req: Request, res: Response) => {
   const user = await prisma.user.findUnique({
     where: {
-      userName: req.body.username,
+      username: req.body.username,
     },
   });
 
