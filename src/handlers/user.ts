@@ -4,7 +4,7 @@ import { Request, Response } from "express";
 import { createJWT, comparePassword, hashPassword } from "../modules/auth";
 
 //TODO: Create a user
-const createUser = async (req: Request, res: Response, next: any) => {
+const createUser = async (req: Request, res: Response, next?: any) => {
   try {
     const hash = hashPassword(req.body.password);
 
