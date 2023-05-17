@@ -4,7 +4,7 @@
   "description": "Cette API permettra à un product manager ou un ingénieur de publier des mise à jour de produits pour leurs utilisateurs. Les utilisateur doivent pouvoir lire, créer, mettre à jour ou supprimer les mises à jour des produits",
   "main": "./src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "dev": "nodemon ./src/index.ts",
     "prettier": "prettier --write ."
   },
