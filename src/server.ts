@@ -2,7 +2,7 @@ import express from "express";
 import morgan from "morgan";
 import cors from "cors";
 import router from "./router";
-import middleware from "./middleware";
+import { protect } from "./modules/middleware";
 import { connectUser, createUser } from "./handlers/user";
 
 const app = express();
@@ -17,7 +17,7 @@ app.get("/", (req, res) => {
   throw new Error("Oops");
 });
 
-app.use("/api/v1", middleware.protect, router);
+app.use("/api/v1", protect, router);
 
 app.post("/user", createUser);
 app.post("/connect-user", connectUser);
