@@ -13,8 +13,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // Permet d'utiliser les URLs cryptée (google.com?q=1&b=2)
 
-app.get("/", (req, res) => {
-  throw new Error("Oops");
+app.get("/", (req: express.Request, res: express.Response) => {
+  return res.status(200).json({ message: "This API is working 🚀" });
 });
 
 app.use("/api/v1", protect, router);
